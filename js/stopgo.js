@@ -65,7 +65,7 @@ function hide(){
 	console.log('hide');
 	document.getElementById("bg").style.display="none";
 	clickNumber++;
-	delay -= 50;
+	delay += 50;
 }
 
 function turnBlack(){
@@ -81,7 +81,7 @@ function clicked(){
 	
 	if (!goNogo[clickNumber]){
 		console.log('increment');
-		delay += 50;
+		delay -= 50;
 	}
 	
 	clickNumber++;

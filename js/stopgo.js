@@ -1,5 +1,6 @@
 var clickNumber = 0;
-var createDelay = [1000, 3000, 2000, 1000];
+var createDelay = 1000;
+var delay = 250;
 var goNogo = [true, false, false, true]
 var reactionTimeList = [];
 var startTime;
@@ -26,25 +27,47 @@ $(document).ready(function() {
 
 function change(){
 	if (goNogo[clickNumber]){
-		setTimeout(go, createDelay[clickNumber]);
+		setTimeout(go, createDelay);
 	}
 	else{
-		setTimeout(stop, createDelay[clickNumber]);
+		setTimeout(stop, createDelay);
 	}
 }
 
 function go(){
 	console.log("Go");
-			var date = new Date();
-		startTime = date.getTime();
+	var date = new Date();
+	startTime = date.getTime();
 	document.getElementById("bg").style.backgroundColor="green";
 	document.getElementById("bg").style.display="block";
 }
 
 function stop(){
+	document.getElementById("bg").style.backgroundColor="green";
+	document.getElementById("bg").style.display="block";
+	
 	console.log("Stop");
-			var date = new Date();
-		startTime = date.getTime();
+	var date = new Date();
+	startTime = date.getTime();
+
+	setTimeout(turnBlack, delay);
+	
+	if (clickNumber < goNogo.length){
+		setTimeout(hide, 1000);
+		setTimeout(change, 1000);
+	}
+	else {
+		endGame();
+	}
+}
+
+function hide(){
+	document.getElementById("bg").style.display="none";
+	clickNumber++;
+	delay -= 50;
+}
+
+function turnBlack(){
 	document.getElementById("bg").style.backgroundColor="black";
 	document.getElementById("bg").style.display="block";
 }
@@ -54,8 +77,14 @@ function clicked(){
 	var currentTime = date.getTime();
 	reactionTimeList.push(startTime - currentTime);
 	document.getElementById("bg").style.display="none";
+	
+	if (goNogo[clickNumber]){
+		delay += 50;
+	}
+	
 	clickNumber++;
-	if (clickNumber < createDelay.length){
+	
+	if (clickNumber < goNogo.length){
 		change();
 	}
 	else {

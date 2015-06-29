@@ -62,6 +62,7 @@ function stop(){
 }
 
 function hide(){
+	console.log('hide');
 	document.getElementById("bg").style.display="none";
 	clickNumber++;
 	delay -= 50;
@@ -78,7 +79,8 @@ function clicked(){
 	reactionTimeList.push(startTime - currentTime);
 	document.getElementById("bg").style.display="none";
 	
-	if (goNogo[clickNumber]){
+	if (!goNogo[clickNumber]){
+		console.log('increment');
 		delay += 50;
 	}
 	

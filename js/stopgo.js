@@ -4,6 +4,7 @@ var delay = 250;
 var goNogo = [true, false, false, true]
 var reactionTimeList = [];
 var startTime;
+var trueStart;
 var clicks = 0;
 var reactionTime = 0;
 var element = document.getElementById("bg");
@@ -17,11 +18,12 @@ $(document).ready(function() {
 		change();
 		var date = new Date();
 		startTime = date.getTime();
+		trueStart = startTime;
     }); 
 	
 	$("#dontclick").click(function(){
-		var temp = date.getTime();
-		misClickTimes.push(temp);
+		var temp = (new Date).getTime();
+		misClickTimes.push(temp-trueStart);
 	}); 
 });
 
